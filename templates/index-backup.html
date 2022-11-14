@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Please rate your service</title>
+</head>
+<body>
+<div class="container">
+    <img src="../static/logo.png" alt="logo">
+    {% if message %}
+    <p class="message">{{message|safe}}</p>
+    {% endif %}
+    <form action="/submit" method="post">
+        <div class="form-group">
+            <h3>Name</h3>
+            <input
+                    type="text"
+                    name="customer"
+                    placeholder="Your Name"
+            />
+            <div class="form-group">
+                <h3>From</h3>
+                <select name="dealer">
+                    <option value="">Select Dealer</option>
+                    <option value="billy">billyboy</option>
+                    <option value="bob">bob</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h3>rate dealer</h3>
+                <input type="radio" name="rating" value="0"/>0
+                <input type="radio" name="rating" value="1"/>1
+                <input type="radio" name="rating" value="2"/>2
+                <input type="radio" name="rating" value="3"/>3
+                <input type="radio" name="rating" value="4"/>4
+                <input type="radio" name="rating" value="5"/>5
+            </div>
+            <div class="form-group">
+                <h3>Comments</h3>
+                <textarea name="comments" id="" cols="30" rows="10" placeholder="Tell us what u liked"></textarea>
+            </div>
+            <input type="submit" value="submit" class="btn"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

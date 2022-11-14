@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Success</title>
+</head>
+<body>
+<div class="container">
+    {%if requests%}
+    <h1>Ride Requests</h1>
+    {%for ride in rides%}
+    {%if ride[6]%}
+    <details>
+        <summary>From:{{ride[2]}}
+            To:{{ride[3]}} <br>
+            {{ride[4]}} {{ride[5]}} <br>
+
+        </summary>
+            No of people: {{ride[8]}}<br>
+            Contact:{{ride[1]}}, {{ride[7]}}<br>
+        <a href="#" class="btn" style="text-decoration:none;">Give a ride!</a>
+
+        {%endif%}
+    </details>
+    {% endfor %}
+    {% else %}
+    <h1>Available Rides</h1>
+    {%for ride in rides%}
+    {%if not ride[6]%}
+    <details>
+        <summary>From:{{ride[2]}}
+            To:{{ride[3]}} <br>
+            {{ride[4]}} {{ride[5]}} <br>
+        </summary>
+            No of people: {{ride[8]}}<br>
+            Contact:{{ride[1]}}, {{ride[7]}}<br>
+        <a href="#" class="btn" style="text-decoration:none;">Go!</a>
+    </details>
+    {%endif%}
+    {% endfor %}
+    {%endif%}
+
+
+</div>
+</body>
+</html>

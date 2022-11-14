@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Success</title>
+</head>
+<body>
+<div class="container">
+    <h1>Books</h1>
+    {%for book in books%}
+    <details>
+        <summary><h3>{{book[1]}}</h3>
+            Author:{{book[2]}} <br>
+
+        </summary>
+        Contact:{{book[3]}} <br>
+        Description:{{book[4]}}<br>
+        <a href="#" class="btn" style="text-decoration:none;"> <center>I want it!</center></a>
+
+    </details>
+    {% endfor %}
+
+
+
+</div>
+</body>
+</html>

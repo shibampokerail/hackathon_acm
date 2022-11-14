@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/tailwind.css">
+    <title>Success</title>
+</head>
+<body>
+<div class="container">
+    <h2>Choose an option</h2>
+    <details>
+        <summary>RideShare</summary>
+        <a href="/rideshare_form?req_type=1" class="" style="text-decoration:none;">Request a ride!</a>
+        <a href="/rideshare_form?req_type=0" class="btn" style="text-decoration:none;">Offer a ride!</a>
+        <a href="/display_rides?req_type=0" class="btn" style="text-decoration:none;">View available rides!</a>
+        <a href="/display_rides?req_type=1" class="btn" style="text-decoration:none;">View ride requests!</a>
+    </details>
+    <details>
+        <summary>BookShare</summary>
+        <a href="/share_book" class="btn" style="text-decoration:none;">Share a book!</a>
+        <a href="/display_books" class="btn" style="text-decoration:none;">Find books!</a>
+    </details>
+    <details>
+        <summary>Share what's on your mind..</summary>
+
+        <form action="/submit_text" method="post">
+        <div class="form-group">
+            <textarea name="text" placeholder="Your thoughts go here..." maxlength="200"></textarea>
+            <input type="submit" value="Share!" class="btn"/>
+        </div>
+        </form>
+    </details>
+</div>
+<div class="container">
+ {% if message %}
+    <p class="message">{{message|safe}}</p>
+    {% endif %}
+    <h2>Posts</h2>
+    {% for post in posts|reverse%}
+        <p class="post">
+            {{post[1]}}
+        </p>
+    {% endfor %}
+</div>
+</body>
+</html>
