@@ -133,7 +133,7 @@ def submit_ride():
         except:
             request_ = request.form["offer"]
             request_ = 0
-        
+
         phone_number = (request.form["phone_number"]).replace("-", "")
         # print(customer,dealer,rating,comment)
         if name == "" or start == "" or end == "" or date == "" or time == "" or no_of_people == 0 or phone_number == "":
@@ -188,4 +188,7 @@ def submit_book():
 
 
 if __name__ == "__main__":
-    app.run(host="192.168.0.154", port=8000)
+    try:
+        app.run(host="150.243.211.234", port=8000)
+    except:
+        app.run()
