@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS, cross_origin
 import psycopg2
 
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 DEVELOPMENT = 'dev'
 PRODUCTION = 'prod'
@@ -79,10 +81,13 @@ class Feed(db.Model):
 
 
 @app.route('/')
+@cross_origin(supports_credentials=True)
 def index():
     mycursor.execute("SELECT * FROM posts")
     posts = mycursor.fetchall()
-    return render_template('home.html', posts=posts)
+    if request.args.get("data_req") == "1":
+        return render_template('home.html', posts=posts)
+    return posts
 
 
 @app.route('/submit_text', methods=['POST'])
@@ -180,6 +185,8 @@ def submit_book():
         # print(customer,dealer,rating,comment)
         if name == "" or author == "" or contact_details == "":
             return render_template('book.html', message="Please enter the empty fields", request=request_)
+        if name == db.session.query(BookShare).filter(BookShare.name == name).count() >= 1:
+            return render_template('book.html', message="You have already posted", request=request_)
         else:
             data = BookShare(name, author, contact_details, description)
             db.session.add(data)
@@ -189,6 +196,6 @@ def submit_book():
 
 if __name__ == "__main__":
     try:
-        app.run(host="150.243.211.234", port=8000)
+        app.run(host="150.243.202.66", port=8000)
     except:
         app.run()
